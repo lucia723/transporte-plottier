@@ -62,6 +62,17 @@
     L.marker([-38.96, -68.23]).addTo(map)
       .bindPopup('<strong>Marcador de prueba</strong><br>Esta no es la ubicación real de un colectivo.')
       .openPopup();
+    // Recorridos de prueba: trazos ilustrativos, no oficiales
+const recorridos = L.layerGroup().addTo(map);
+
+L.polyline([
+  [-38.96, -68.23],
+  [-38.955, -68.24],
+  [-38.95, -68.25]
+], {
+  color: '#00a6d6',
+  weight: 5
+}).bindPopup('Línea 50A — trazo ilustrativo').addTo(recorridos);
   </script>
 </body>
 </html>
