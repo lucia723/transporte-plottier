@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#123a5a">
+  <title>Transporte Plottier | Mapa</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin="">
+  <style>
+    :root { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; color: #182533; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #f3f6f8; }
+    header { background: #123a5a; color: white; padding: 18px 16px; }
+    header h1 { margin: 0 0 5px; font-size: 1.35rem; }
+    header p { margin: 0; font-size: .95rem; opacity: .9; }
+    main { max-width: 1100px; margin: 0 auto; padding: 14px; }
+    .notice { background: #fff7df; border: 1px solid #e8cf7a; padding: 12px; border-radius: 10px; margin-bottom: 12px; line-height: 1.4; }
+    .panel { background: white; border-radius: 12px; padding: 14px; box-shadow: 0 2px 8px #142b3b12; margin-bottom: 12px; }
+    #map { height: min(65vh, 620px); min-height: 340px; width: 100%; border-radius: 12px; background: #dfe8ed; }
+    .legend { display: flex; gap: 8px; align-items: center; font-size: .9rem; }
+    .dot { width: 11px; height: 11px; border-radius: 50%; background: #e39a21; display: inline-block; }
+    footer { color: #526273; font-size: .82rem; padding: 12px 2px 24px; line-height: 1.5; }
+    a { color: #125b8b; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🚌 Transporte Plottier</h1>
+    <p>Mapa de referencia del transporte público</p>
+  </header>
+  <main>
+    <div class="notice">
+      <strong>Versión de prueba:</strong> el marcador es ilustrativo y no muestra la ubicación real de un colectivo.
+      La ubicación en vivo requiere una fuente de datos autorizada.
+    </div>
+    <section class="panel">
+      <div class="legend"><span class="dot"></span><span>Marcador de demostración (no es GPS en vivo)</span></div>
+    </section>
+    <div id="map" role="region" aria-label="Mapa interactivo de Plottier"></div>
+    <footer>
+      Mapa elaborado con Leaflet y datos cartográficos de OpenStreetMap.
+      Este sitio es independiente y no es oficial de la Municipalidad, de Indalo ni de Cuando Llega.
+      <br><a href="https://leafletjs.com/" target="_blank" rel="noopener">Leaflet</a> ·
+      <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">Colaboradores de OpenStreetMap</a>
+    </footer>
+  </main>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+          integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+          crossorigin=""></script>
+  <script>
+    // Centro aproximado de Plottier para iniciar la vista del mapa.
+    const map = L.map('map').setView([-38.96, -68.23], 13);
+
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+
+    // Marcador ficticio de demostración: reemplazar solo cuando exista un feed autorizado.
+    L.marker([-38.96, -68.23]).addTo(map)
+      .bindPopup('<strong>Marcador de prueba</strong><br>Esta no es la ubicación real de un colectivo.')
+      .openPopup();
+  </script>
+</body>
+</html>
